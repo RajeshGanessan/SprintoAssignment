@@ -35,6 +35,7 @@ public class BookingPage {
     String selectCity = "//ul[@role='listbox']/li//p[contains(text(),'%s')]";
 
 
+    //Selecting departure City
     public BookingPage selectDepartureCity(String departure) {
         driver.findElement(fromCity).sendKeys(departure);
         wait.until(ExpectedConditions.visibilityOfElementLocated(cityList));
@@ -42,6 +43,7 @@ public class BookingPage {
         return this;
     }
 
+    //Selecting destination city
     public BookingPage selectDestinationCity(String destination) {
         driver.findElement(toCity).sendKeys(destination);
         wait.until(ExpectedConditions.visibilityOfElementLocated(cityList));
@@ -49,6 +51,7 @@ public class BookingPage {
         return this;
     }
 
+    //Selecting departure date
     public BookingPage selectDepartureDate(int daysFromToday){
         String dateToPick = getDepartureDate(daysFromToday);
         wait.until(ExpectedConditions.elementToBeClickable(dateField));
@@ -57,17 +60,20 @@ public class BookingPage {
         return this;
     }
 
+    //Clicking search flights
     public FlightsPage clickOnSearchFlights(){
         wait.until(ExpectedConditions.elementToBeClickable(dateField));
         driver.findElement(searchFlights).click();
         return new FlightsPage(driver,wait);
     }
+
     private String getDepartureDate(int daysFromToday) {
         simpleDateFormat = new SimpleDateFormat("MMM dd yyyy");
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.DATE,daysFromToday);
         return simpleDateFormat.format(cal.getTime());
     }
+
 
     private void jsClick(By by){
         jse = (JavascriptExecutor) driver;

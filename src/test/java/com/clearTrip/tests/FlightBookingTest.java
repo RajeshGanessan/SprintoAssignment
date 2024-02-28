@@ -25,7 +25,7 @@ public class FlightBookingTest extends BaseTest {
              .selectDestinationCity(AppConstants.DESTINATION_CITY)
              .selectDepartureDate(AppConstants.NO_OF_DAYS_FROM_TODAY)
              .clickOnSearchFlights();
-//     Assert.assertTrue(flightsPage.waitForResults());
+     Assert.assertTrue(flightsPage.isLockPricesShown());
     }
 
     @Test(priority = 2)

@@ -34,16 +34,23 @@ public class FlightsPage {
     private By flightBookNow = By.xpath("(//div[@class='clusterContent']//div[contains(@class,'listingCard')]//button)[position()=1]");
     private By bookConfirm = By.xpath("(//button[text()='BOOK NOW'])[1]");
 
+    private By lockPricesPopUp = By.xpath("//p[contains(text(),'Lock Prices')]");
+
     private By completeBooking = By.xpath("//h2[text()='Complete your booking']");
 
 
     //To close the Popup displaying in flight result page
     private void closePopUp() {
+        if(isLockPricesShown())
+            driver.findElement(popUpClose).click();
+    }
+
+    public boolean isLockPricesShown(){
         driverFluentWait.withTimeout(Duration.ofMinutes(1))
                 .pollingEvery(Duration.ofSeconds(10)).ignoring(TimeoutException.class).ignoring(NoSuchElementException.class)
-                .until(ExpectedConditions.visibilityOfElementLocated(popUpClose));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(popUpClose));
-        driver.findElement(popUpClose).click();
+                .until(ExpectedConditions.visibilityOfElementLocated(lockPricesPopUp));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lockPricesPopUp));
+        return driver.findElement(lockPricesPopUp).isDisplayed();
     }
 
 
