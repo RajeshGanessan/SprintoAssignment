@@ -8,9 +8,9 @@ Need to have Java and Maven with any IDE in your machine
 
 ### How to use
 Import the project in IntelliJ editor.
-Go to folder src/test/java
+Go to folder src/test/java/resources/testRunner
 
-Run those test suites one by one.
+Run the xml file "makeMyTripSuite.xml"
 
 ## Project structure
 Hybrid framework with Page object model design pattern.
@@ -23,7 +23,7 @@ It contains the classes with functionalities that drives the test cases.
 It contains the test suites.
 ### src/test/resources  : 
 Contains the config file 
-### makeMytrip.xml : 
+### makeMytripSuite.xml : 
 It facilitates running the test suites all at once from this file.
 
 To execute,
