@@ -31,22 +31,25 @@ public class FlightsPage {
 
     private By cheapestFilter = By.xpath("//div[contains(@class,'sortTabHeadList ')]//div/p[text()='Cheapest']");
 
-    private By flightBookNow = By.xpath("(//div[@class='clusterContent']//div[contains(@class,'listingCard')])[position()=1]");
+    private By flightBookNow = By.xpath("(//div[@class='clusterContent']//div[contains(@class,'listingCard')]//button)[position()=1]");
     private By bookConfirm = By.xpath("(//button[text()='BOOK NOW'])[1]");
 
     private By completeBooking = By.xpath("//h2[text()='Complete your booking']");
 
 
+    //To close the Popup displaying in flight result page
     private void closePopUp() {
-        driver.findElement(popUpClose).click();
-    }
-
-
-    public FlightsPage sortByCheapest()  {
         driverFluentWait.withTimeout(Duration.ofMinutes(1))
                 .pollingEvery(Duration.ofSeconds(10)).ignoring(TimeoutException.class).ignoring(NoSuchElementException.class)
                 .until(ExpectedConditions.visibilityOfElementLocated(popUpClose));
         wait.until(ExpectedConditions.visibilityOfElementLocated(popUpClose));
+        driver.findElement(popUpClose).click();
+    }
+
+
+
+    //Sorting to cheapest using filter
+    public FlightsPage sortByCheapest()  {
         closePopUp();
         if (waitForResults()) {
             driver.findElement(cheapestFilter).click();
@@ -54,10 +57,14 @@ public class FlightsPage {
         return this;
     }
 
+
+
+    //Booking the cheapest and Navigating to payments page
     public boolean clickBookNow() {
         wait.until(ExpectedConditions.elementToBeClickable(flightBookNow));
         driver.findElement(flightBookNow).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(bookConfirm)).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(bookConfirm));
+        driver.findElement(bookConfirm).click();
         String mainTab  = driver.getWindowHandle();
         boolean isSwitched = switchToNextTab(driver.getWindowHandles(), mainTab);
         if(isSwitched){
@@ -72,6 +79,7 @@ public class FlightsPage {
     }
 
 
+    //switching to next tab
     private boolean switchToNextTab(Set<String> windowlist,String mainTab) {
 
         for(String window : windowlist){
