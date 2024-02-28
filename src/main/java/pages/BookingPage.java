@@ -28,10 +28,7 @@ public class BookingPage {
     private By toCity = By.xpath("//input[@id='toCity']");
     private By cityList =  By.xpath("//ul[@role='listbox']");
 
-    private By dateList = By.xpath("//div[@class='DayPicker-Week']/div");
-
     private By dateField = By.xpath("//label[@for='departure']");
-    private By week = By.xpath("//div[@class='DayPicker-Caption']/div");
     private By searchFlights = By.xpath("//a[text()='Search']");
 
     String selectDate = "//div[@class='DayPicker-Day' and contains(@aria-label,'%s')]";
@@ -55,7 +52,6 @@ public class BookingPage {
     public BookingPage selectDepartureDate(int daysFromToday){
         String dateToPick = getDepartureDate(daysFromToday);
         wait.until(ExpectedConditions.elementToBeClickable(dateField));
-//        driver.findElement(dateField).click();
         jsClick(dateField);
         driver.findElement(By.xpath(String.format(selectDate,dateToPick))).click();
         return this;

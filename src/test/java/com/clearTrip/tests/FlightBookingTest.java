@@ -24,12 +24,13 @@ public class FlightBookingTest extends BaseTest {
              .selectDestinationCity("Delhi")
              .selectDepartureDate(7)
              .clickOnSearchFlights();
-//     Assert.assertTrue(flightsPage.waitForResults());
+     Assert.assertTrue(flightsPage.waitForResults());
     }
 
     @Test(priority = 2)
     public void chooseTheFlight() throws InterruptedException {
-        flightsPage.sortByCheapest()
+       boolean isInPaymentsPage =  flightsPage.sortByCheapest()
                 .clickBookNow();
+        Assert.assertTrue(isInPaymentsPage);
     }
 }
