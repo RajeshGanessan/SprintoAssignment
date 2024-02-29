@@ -37,6 +37,7 @@ public class BookingPage {
 
     //Selecting departure City
     public BookingPage selectDepartureCity(String departure) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(fromCity));
         driver.findElement(fromCity).sendKeys(departure);
         wait.until(ExpectedConditions.visibilityOfElementLocated(cityList));
         driver.findElement(By.xpath(String.format(selectCity,departure))).click();
@@ -45,6 +46,7 @@ public class BookingPage {
 
     //Selecting destination city
     public BookingPage selectDestinationCity(String destination) {
+        wait.until(ExpectedConditions.presenceOfElementLocated(toCity));
         driver.findElement(toCity).sendKeys(destination);
         wait.until(ExpectedConditions.visibilityOfElementLocated(cityList));
         driver.findElement(By.xpath(String.format(selectCity,destination))).click();
