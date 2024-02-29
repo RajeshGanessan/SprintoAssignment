@@ -26,6 +26,8 @@ Contains the config file
 ### makeMytripSuite.xml : 
 It facilitates running the test suites all at once from this file.
 
-To execute,
+### How to Run tests
 
-Run the testng.xml file as Test. 
+* Run the testng.xml file as Test
+
+* We can run it as a maven project as well, through `mvn clean test` command 
